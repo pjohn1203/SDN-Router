@@ -42,7 +42,6 @@ class Final (object):
     #   - port_on_switch represents the port that the packet was received on.
     #   - switch_id represents the id of the switch that received the packet
     #      (for example, s1 would have switch_id == 1, s2 would have switch_id == 2, etc...)
-    print "Hello, World!"
 
     print(packet)
     ip = packet.find('ipv4')
@@ -63,6 +62,8 @@ class Final (object):
 
     
     # SWITCH 1 FUNCTIONS
+    # connected by port to host 1 and Switch 4
+
     if switch_id == 1:
 	if port_on_switch == 1:
 		msg = of.ofp_flow_mod()
@@ -81,7 +82,12 @@ class Final (object):
 		msg.actions.append(of.ofp_action_output(port = 1))
 		self.connection.send(msg)
 
-    # SWITCH 2 FUNCTIONS    
+
+
+
+    # SWITCH 2 FUNCTIONS   
+    # connected by respective ports to host 2 and Switch 4
+
     if switch_id == 2:
 	if port_on_switch == 1:
 		# send to Switch Core
@@ -107,6 +113,8 @@ class Final (object):
 
 
     # SWITCH 3 FUNCTIONS
+    # connected by respective ports to host 3 and Switch 4
+
     if switch_id == 3:
 	if port_on_switch == 1:
 		# send to Switch Core
@@ -132,6 +140,11 @@ class Final (object):
 
 
     # SWITCH 4 FUNCTIONS
+    # connected respectively by ports to host 4 and links all
+    # other switches to each other. 
+    # Monitors ICMP traffic between all the hosts
+
+
     if switch_id == 4:
 	if port_on_switch == 1:
 		# send to Switch 1
@@ -217,7 +230,11 @@ class Final (object):
 
 
 
+
     # SWITCH 5 FUNCTIONS
+    # connected by respective ports to host 5 and Switch 4
+
+    
     if switch_id == 5:
 	if port_on_switch == 1:
 		# send to Switch Core		
